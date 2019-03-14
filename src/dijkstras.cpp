@@ -94,6 +94,7 @@ void dijkstras(int src, int dst, int row, int col, vector<Node*> &map, multimap<
 
 	multimap<int, int> list;
 	multimap<int, int>::iterator cur, mit;
+	multimap<int, int>::iterator temp;
 
 	int tmp_pos, d, e;
 
@@ -119,11 +120,14 @@ void dijkstras(int src, int dst, int row, int col, vector<Node*> &map, multimap<
 			d = map[tmp_pos]->distance + e;
 
 			if(map[tmp_pos-col]->distance == -1 || d < map[tmp_pos-col]->distance){
-
-				for(mit = list.begin(); mit != list.end(); mit++){
+				
+				for(mit = list.begin(); mit != list.end();){
+					temp = mit;
+					temp++;
 					if(mit->second == tmp_pos-col){
 						list.erase(mit);
 					}
+					mit = temp;
 				}
 
 				map[tmp_pos-col]->distance = d;
@@ -141,10 +145,13 @@ void dijkstras(int src, int dst, int row, int col, vector<Node*> &map, multimap<
 
 			if(map[tmp_pos+1]->distance == -1 || d < map[tmp_pos+1]->distance){
 
-				for(mit = list.begin(); mit != list.end(); mit++){
+				for(mit = list.begin(); mit != list.end();){
+					temp = mit;
+					temp++;
 					if(mit->second == tmp_pos+1){
 						list.erase(mit);
 					}
+					mit = temp;
 				}
 
 				map[tmp_pos+1]->distance = d;
@@ -161,10 +168,13 @@ void dijkstras(int src, int dst, int row, int col, vector<Node*> &map, multimap<
 
 			if(map[tmp_pos+col]->distance == -1 || d < map[tmp_pos+col]->distance){
 
-				for(mit = list.begin(); mit != list.end(); mit++){
+				for(mit = list.begin(); mit != list.end();){
+					temp = mit;
+					temp++;
 					if(mit->second == tmp_pos+col){
 						list.erase(mit);
 					}
+					mit = temp;
 				}
 
 				map[tmp_pos+col]->distance = d;
@@ -181,10 +191,13 @@ void dijkstras(int src, int dst, int row, int col, vector<Node*> &map, multimap<
 
 			if(map[tmp_pos-1]->distance == -1 || d < map[tmp_pos-1]->distance){
 
-				for(mit = list.begin(); mit != list.end(); mit++){
+				for(mit = list.begin(); mit != list.end();){
+					temp = mit;
+					temp++;
 					if(mit->second == tmp_pos-1){
 						list.erase(mit);
 					}
+					mit = temp;
 				}
 
 				map[tmp_pos-1]->distance = d;
